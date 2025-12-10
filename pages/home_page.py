@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
-from .base_page import BasePage
 
-class HomePage(BasePage):
+class HomePage:
 
     HEADING = (By.TAG_NAME, "h1")
 
