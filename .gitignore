@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Virtual Environment
+.vscode/
+.idea/
+.DS_Store
+
+# Selenium/Testing
+*.log
+logs/
+reports/
+screenshots/
+allure-results/
+test-results/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Chrome Driver (if you download manually)
+chromedriver*
+geckodriver*
