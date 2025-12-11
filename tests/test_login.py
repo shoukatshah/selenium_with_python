@@ -8,9 +8,12 @@ def test_valid_login(driver):
 
     page = LoginPage(driver)
     page.open_login_page()
-    page.login("standard_user", "secret_sauce")
-
-    #assert page.get_success_message() == "Logged In Successfully"
+    if not page.verify_url():
+        raise Exception(f"❌ URL mismatch — stopping test execution")
+    if not page.verify_page_title():
+        page.log.error("❌ Page title mismatch — stopping test execution")
+    page.verify_input_fields() # verify input fields
+    page.login("standard_user", "secret_sauce") #Login with correct credentails
 
     log.info("==== END TEST: valid login ====")
 
@@ -20,7 +23,10 @@ def test_invalid_login(driver):
 
     page = LoginPage(driver)
     page.open_login_page()
+    if not page.verify_url():
+        raise Exception(f"❌ URL mismatch — stopping test execution")
     page.login("wrongUser", "wrongPass")
+    page.verify_error_message_displayed()
 
     #assert "invalid" in page.get_error_message().lower()
 
