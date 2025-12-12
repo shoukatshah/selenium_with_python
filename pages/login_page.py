@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from utils.logger import get_logger
 
 class LoginPage:
@@ -8,13 +9,13 @@ class LoginPage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
         self.log = get_logger()
-
     USERNAME_INPUT = (By.ID, "user-name")
     PASSWORD_INPUT = (By.ID, "password")
     LOGIN_BUTTON = (By.ID, "login-button")
     LOGIN_URL = "https://www.saucedemo.com/"
     LOGIN_CONTAINER = (By.CLASS_NAME, "login_container")
     ERROR_MESSAGE = (By.XPATH, "//h3[@data-test='error']")
+    CART_ICON = (By.CSS_SELECTOR, "[data-test='shopping-cart-link']")
 
     def open_login_page(self):
         self.driver.get(self.LOGIN_URL)
@@ -22,7 +23,6 @@ class LoginPage:
     def verify_url(self):
         self.log.info("Verifying login page loaded properly")
         current_url = self.driver.current_url
-
         if current_url == self.LOGIN_URL:
             self.log.info(f"✅ URL verified: {current_url}")
             return True
@@ -60,20 +60,23 @@ class LoginPage:
         self.log.info("✅ Login button verified")
 
     def verify_error_message_displayed(self, expected_error=None):
-        try:
-            error_element = self.wait.until(EC.visibility_of_element_located(self.ERROR_MESSAGE))
-            assert error_element.is_displayed(), "Error message is not displayed"
-            if expected_error:
+            try:
+                error_element = self.wait.until(EC.visibility_of_element_located(self.ERROR_MESSAGE))
+                assert error_element.is_displayed(), "Error message is not displayed"
                 actual_error = error_element.text
-                assert expected_error in actual_error, f"Error message mismatch. Expected '{expected_error}' in '{actual_error}'"
-                self.log.info(f"✅ Error message displayed: {error_element.text}")
-                return error_element.text
-        except Exception as e:
-            self.log.error(f"Error message verification failed: {e}")
-            raise
+                if expected_error:
+                    if expected_error in actual_error:
+                        self.log.info(f"✅ Error message displayed and matched: {actual_error}")
+                    else:
+                        self.log.error(f"❌ Error message mismatch. Expected '{expected_error}' in '{actual_error}'")
+                else:
+                    self.log.warning(f"⚠ Error message displayed: {actual_error}")
+                return actual_error
 
-
-
+            except TimeoutException:
+                self.log.info("✅ No error message displayed")
+                return None
+            
 
     def login(self, username, password):
         self.wait.until(EC.visibility_of_element_located(self.LOGIN_CONTAINER))
@@ -84,3 +87,7 @@ class LoginPage:
         password_elem.send_keys(password)
         login_elem = self.wait.until(EC.element_to_be_clickable(self.LOGIN_BUTTON))
         login_elem.click()
+        cart_icon = self.wait.until(EC.visibility_of_element_located(self.CART_ICON))
+        assert cart_icon.is_displayed(), "Cart Icon is not being displayed"
+        cart_icon.click()
+

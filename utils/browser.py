@@ -7,7 +7,6 @@ def get_driver():
     options = Options()
     options.add_argument("--start-maximized")
     # options.add_argument("--headless=new")  # Uncomment if needed
-
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     return driver
