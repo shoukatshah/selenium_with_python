@@ -89,5 +89,4 @@ class LoginPage:
         login_elem.click()
         cart_icon = self.wait.until(EC.visibility_of_element_located(self.CART_ICON))
         assert cart_icon.is_displayed(), "Cart Icon is not being displayed"
-        cart_icon.click()
 

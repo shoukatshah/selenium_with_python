@@ -14,7 +14,7 @@ def test_valid_login(driver):
     page.verify_input_fields() # verify input fields
     page.login("standard_user", "secret_sauce") #Login with correct credentails
     log.info("==== END TEST: valid login ====")
-@pytest.mark.only
+    
 def test_invalid_login(driver):
     log.info("==== START TEST: invalid login ====")
     page = LoginPage(driver)
