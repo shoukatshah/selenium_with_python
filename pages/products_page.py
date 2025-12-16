@@ -40,15 +40,67 @@ class ProductsPage:
     def get_products_count(self):
         return len(self.get_all_products())
     
+    def get_sort_dropdown(self):
+        return Select(self.driver.find_element(*self.SORT_DROPDOWN))
+    
     def get_sorting_options(self):
-        sort_dropdown = Select(self.driver.find_element(*self.SORT_DROPDOWN))
+        sort_dropdown = self.get_sort_dropdown()
         return [option.text for option in sort_dropdown.options]
     
     def select_sort_option(self, option_text):
         self.log.info(f"Selecting sort option: {option_text}")
-        sort_dropdown = Select(self.driver.find_element(*self.SORT_DROPDOWN))
+        sort_dropdown = self.get_sort_dropdown()
         sort_dropdown.select_by_visible_text(option_text)
         self.wait.until(EC.presence_of_all_elements_located(self.PRODUCT_CARDS))
+
+    def get_all_product_names(self):
+        names = []
+        for product in self.get_all_products():
+            name = product.find_element(*self.PRODUCT_NAMES).text
+            names.append(name)
+        return names
+    
+    def get_all_product_prices(self):
+        prices = []
+        for product in self.get_all_products():
+            price_text = product.find_element(*self.PRODUCT_PRICES).text
+            price = float(price_text.replace('$', ''))
+            prices.append(price)
+        return prices
+
+    def verify_sorting_by_name_az(self):
+        self.select_sort_option("Name (A to Z)")
+        product_names = self.get_all_product_names()
+        sorted_names = sorted(product_names)
+        assert product_names == sorted_names, \
+             f"Products not sorted A-Z. Got: {product_names}"
+        self.log.info("✅ Products sorted by Name A-Z")
+
+    def verify_sorting_by_name_za(self):
+        self.select_sort_option("Name (Z to A)")
+        product_names = self.get_all_product_names()
+        sorted_names = sorted(product_names, reverse= True)
+        assert product_names == sorted_names, \
+            f"Products not sorted Z-A. Got: {product_names}"
+        self.log.info("✅ Products sorted by Name Z-A")
+
+    def verify_sorting_by_price_low_to_high(self):
+        self.select_sort_option("Price (low to high)")
+        product_prices = self.get_all_product_prices()
+        sorted_prices = sorted(product_prices)
+        assert product_prices == sorted_prices, \
+            f"Products not sorted low to high. Got: {product_prices}"
+        self.log.info("✅ Products sorted by Price low to high")
+
+    def verify_sorting_by_price_high_to_low(self):
+        self.select_sort_option("Price (high to low)")
+        product_prices = self.get_all_product_prices()
+        sorted_prices = sorted(product_prices, reverse= True)
+        assert product_prices == sorted_prices, \
+            f"Products not sorted high to low. Got: {product_prices}"
+        self.log.info("✅ Products sorted by Price high to low")
+
+        
     
     
 
