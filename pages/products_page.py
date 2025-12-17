@@ -100,6 +100,75 @@ class ProductsPage:
             f"Products not sorted high to low. Got: {product_prices}"
         self.log.info("✅ Products sorted by Price high to low")
 
+    def add_product_to_cart(self,product_index=0):
+        self.log.info(f"Adding product to cart at index {product_index}")
+        products = self.get_all_products()
+        assert 0 <= product_index < len(products), \
+            f"Invalid product index"
+        product = products[product_index]
+        product_name = product.find_element(*self.PRODUCT_NAMES).text
+        add_button = product.find_element(By.TAG_NAME, "button")
+        add_button.click()
+        cart_count = self.get_cart_count()
+        self.log.info(f"{product_name} product added to cart successfully")
+        self.log.info(f"Total products added to cart: {cart_count}")
+        #remove_button = product.find_element(By.XPATH, ".//button[contains(text(),'Remove')]")
+        #remove_button.click()
+        self.log.info(f"{product_name} product removed from the cart successfully")
+        return product_name
+    
+    def get_cart_count(self):
+        try:
+            cart_count = self.driver.find_element(By.CLASS_NAME, "shopping_cart_badge")
+            return int(cart_count.text)
+
+        except:
+            return 0
+    
+    def verify_cart_count(self,expected_count):
+        actual_count = self.get_cart_count()
+        assert actual_count == expected_count, \
+            f"Cart count mismatch. Expected: {expected_count}, Got: {actual_count}"
+        self.log.info(f"✅ Cart count verified: {actual_count}")
+
+
+    def add_multiple_product_to_cart(self,indices):
+        added_products = []
+        for index in indices:
+            product_name = self.add_product_to_cart(index)
+            added_products.append(product_name)
+        return added_products
+    
+    def add_all_products_to_cart(self,product_index=0):
+        products = self.get_all_products()
+        for product in products:
+            product_name = product.find_element(*self.PRODUCT_NAMES).text
+            product.find_element(By.TAG_NAME,"button").click()
+            self.log.info(f"✅ Added product to cart: {product_name}")
+
+    def go_to_cart(self):
+        self.log.info("Navigating to cart")
+        self.driver.find_element(*self.CART_ICON).click()
+        assert "cart" in self.driver.current_url, \
+            f"Not on cart page. URL: {self.driver.current_url}"
+        self.log.info("✅ Successfully navigated to cart page")
+        self.driver.back()
+        self.verify_page_loaded()
+
+    def view_product_details_page(self, product_name):
+        products = self.get_all_products()
+        for product in products:
+            name_element = product.find_element(*self.PRODUCT_NAMES)
+            name_text = name_element.text
+            if name_text == product_name:
+                name_element.click()
+                self.log.info(f"✅ Clicked product: {product_name}")
+                return True
+        raise Exception(f"Product '{product_name}' not found")
+
+        
+        
+
         
     
     
