@@ -16,19 +16,16 @@ class TestProductsPage:
         self.products_page = ProductsPage(driver)
         assert self.products_page.verify_page_loaded()
 
-    @pytest.mark.skip
     def test_products_displayed(self):
         """Test that products are displayed"""
         count = self.products_page.get_products_count()
         assert count > 0
         log.info(f"✅ Found {count} products")
 
-    @pytest.mark.skip
     def test_page_title(self):
         """Test page title is correct"""
         assert "inventory" in self.products_page.driver.current_url
 
-    @pytest.mark.skip
     def test_sort_dropdown_displayed(self):
         log.info("Test: Sorting options availability")
         options = self.products_page.get_sorting_options()
@@ -42,22 +39,18 @@ class TestProductsPage:
             f"Sorting options mismatch. Expected {expected_options}, got {options}"
         log.info("✅ All sorting options available")
 
-    @pytest.mark.skip
     def test_sort_by_name_a_to_z(self):
         log.info("Test: Sort by Name A-Z")
         self.products_page.verify_sorting_by_name_az()
 
-    @pytest.mark.skip
     def test_sort_by_name_z_to_a(self):
         log.info("Test: Sort by Name Z-A")
         self.products_page.verify_sorting_by_name_za()
 
-    @pytest.mark.skip
     def test_sort_by_price_low_to_high(self):
         log.info("Test: Sort by Price low to high")
         self.products_page.verify_sorting_by_price_low_to_high()
 
-    @pytest.mark.skip
     def test_sort_by_price_high_to_low(self):
         log.info("Test: Sort by Price high to low")
         self.products_page.verify_sorting_by_price_high_to_low()

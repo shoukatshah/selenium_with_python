@@ -78,3 +78,8 @@ class CartPage:
         self.driver.find_element(*self.CONTINUE_SHOPPING_BTN).click()
         assert "inventory.html" in self.driver.current_url, \
             f"Not inventory.html in url. URL: {self.driver.current_url}"
+    
+    def click_checkout(self):
+        """Click Checkout button"""
+        self.log.info("Clicking Checkout button")
+        self.driver.find_element(*self.CHECKOUT_BTN).click()

@@ -114,7 +114,7 @@ class ProductsPage:
         self.log.info(f"Total products added to cart: {cart_count}")
         #remove_button = product.find_element(By.XPATH, ".//button[contains(text(),'Remove')]")
         #remove_button.click()
-        self.log.info(f"{product_name} product removed from the cart successfully")
+        #self.log.info(f"{product_name} product removed from the cart successfully")
         return product_name
     
     def get_cart_count(self):
