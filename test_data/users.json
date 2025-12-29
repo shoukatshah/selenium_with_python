@@ -1,0 +1,10 @@
+{
+    "valid_users":[
+        {"username": "standard_user", "password": "secret_sauce", "expected": "success"},
+        {"username": "problem_user", "password": "secret_sauce", "expected": "success_with_issues"}
+    ],
+    "invalid_users":[
+        {"username": "locked_out_user", "password": "secret_sauce", "expected": "locked_error"},
+        {"username": "wrong_user", "password": "wrong_pass", "expected": "invalid_credentials"}
+    ]
+}

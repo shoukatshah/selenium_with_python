@@ -1,0 +1,27 @@
+checkout_scenarios:
+  valid:
+    - first_name: "John"
+      last_name: "Syed"
+      postal_code: "12345"
+      expected: "success"
+    
+    - first_name: "Jane"
+      last_name: "Smith"
+      postal_code: "54321"
+      expected: "success"
+  
+  invalid:
+    - first_name: ""
+      last_name: "Doe"
+      postal_code: "12345"
+      expected_error: "First Name is required"
+    
+    - first_name: "John"
+      last_name: ""
+      postal_code: "12345"
+      expected_error: "Last Name is required"
+    
+    - first_name: "John"
+      last_name: "Doe"
+      postal_code: ""
+      expected_error: "Postal Code is required"
