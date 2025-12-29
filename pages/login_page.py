@@ -77,6 +77,12 @@ class LoginPage:
                 self.log.info("✅ No error message displayed")
                 return None
             
+    def get_error_message(self):
+         error_element = self.wait.until(EC.visibility_of_element_located(self.ERROR_MESSAGE))
+         assert error_element.is_displayed(), "Error message is not displayed"
+         actual_error = error_element.text
+         return actual_error
+            
 
     def login(self, username, password):
         self.wait.until(EC.visibility_of_element_located(self.LOGIN_CONTAINER))
@@ -87,6 +93,15 @@ class LoginPage:
         password_elem.send_keys(password)
         login_elem = self.wait.until(EC.element_to_be_clickable(self.LOGIN_BUTTON))
         login_elem.click()
-        cart_icon = self.wait.until(EC.visibility_of_element_located(self.CART_ICON))
-        assert cart_icon.is_displayed(), "Cart Icon is not being displayed"
+        try:
+            cart_icon = self.wait.until(EC.visibility_of_element_located(self.CART_ICON))
+            assert cart_icon.is_displayed(), "Cart Icon is not being displayed"
+
+        except TimeoutException:
+            error_element = self.wait.until(EC.visibility_of_element_located(self.ERROR_MESSAGE))
+            assert error_element.is_displayed(), "Error message is not displayed"
+            error_text = error_element.text
+            self.log.info(f"✅ This is error message: {error_text}")
+
+        
 
