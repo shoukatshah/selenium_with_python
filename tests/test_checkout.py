@@ -6,6 +6,8 @@ from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from pages.checkout_complete_page import CheckoutCompletePage
 from utils.logger import get_logger
+import yaml
+
 
 log = get_logger()
 
@@ -31,11 +33,20 @@ class TestCheckout:
         log.info("===== TEARDOWN: Checkout test completed =====")
 
     @pytest.fixture
-    def setup_checkout_step2(self):
+    def checkout_data(self):
+        with open('test_data/checkout_data.yaml') as f:
+            return yaml.safe_load(f)
+
+    @pytest.fixture
+    def setup_checkout_step2(self,checkout_data):
+        data = checkout_data["checkout_scenarios"]["valid"][0]
+        first_name = data["first_name"]
+        last_name = data["last_name"]
+        postal_code = data["postal_code"]
         self.checkout_page.complete_checkout_step1(
-            first_name="John",
-            last_name="Doe",
-            postal_code="12345"
+            first_name=first_name,
+            last_name=last_name,
+            postal_code=postal_code
         )
         self.checkout_page.verify_checkout_step2_loaded()
     
