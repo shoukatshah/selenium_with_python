@@ -7,6 +7,7 @@ from pages.checkout_page import CheckoutPage
 from pages.checkout_complete_page import CheckoutCompletePage
 from utils.logger import get_logger
 import yaml
+import allure
 
 
 log = get_logger()
@@ -16,19 +17,27 @@ class TestCheckout:
     def setup(self, driver):
         # Login
         login_page = LoginPage(driver)
-        login_page.open_login_page()
-        login_page.login("standard_user", "secret_sauce")
+        with allure.step("Open login page"):
+            login_page.open_login_page()
+        with allure.step("Start login"):
+            login_page.login("standard_user", "secret_sauce")
         self.products_page = ProductsPage(driver)
-        assert self.products_page.verify_page_loaded()
+        with allure.step("Verifying the products page loaded"):
+            assert self.products_page.verify_page_loaded()
         self.cart_page = CartPage(driver)
         # Add product to cart and go to cart page
-        self.products_page.add_multiple_product_to_cart([0,2,4])
-        self.cart_page.click_cart_icon()
-        self.cart_page.verify_page_loaded()
+        with allure.step("Adding multiple products to cart"):
+            self.products_page.add_multiple_product_to_cart([0,2,4])
+        with allure.step("Clicking cart icon"):
+            self.cart_page.click_cart_icon()
+        with allure.step("Verifying the cart page loaded"):
+            self.cart_page.verify_page_loaded()
         # Go to checkout
         self.checkout_page = CheckoutPage(driver)
-        self.checkout_page.click_checkout()
-        self.checkout_page.verify_checkout_step1_loaded()
+        with allure.step("Clicking to checkout button and redirecting to checkout page"):
+            self.checkout_page.click_checkout()
+        with allure.step("Verifying that checkout page loaded"):
+            self.checkout_page.verify_checkout_step1_loaded()
         yield
         log.info("===== TEARDOWN: Checkout test completed =====")
 
