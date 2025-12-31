@@ -1,0 +1,20 @@
+2025-12-31 10:07:39,523 — INFO — ✅ Login container is visible
+2025-12-31 10:07:39,655 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:39,655 — INFO — Adding product to cart at index 0
+2025-12-31 10:07:39,689 — INFO — Sauce Labs Backpack product added to cart successfully
+2025-12-31 10:07:39,689 — INFO — Total products added to cart: 1
+2025-12-31 10:07:39,689 — INFO — Adding product to cart at index 2
+2025-12-31 10:07:39,714 — INFO — Sauce Labs Bolt T-Shirt product added to cart successfully
+2025-12-31 10:07:39,714 — INFO — Total products added to cart: 2
+2025-12-31 10:07:39,714 — INFO — Adding product to cart at index 4
+2025-12-31 10:07:39,739 — INFO — Sauce Labs Onesie product added to cart successfully
+2025-12-31 10:07:39,739 — INFO — Total products added to cart: 3
+2025-12-31 10:07:39,761 — INFO — ✅ Cart icon clicked
+2025-12-31 10:07:39,761 — INFO — Verifying cart page loaded
+2025-12-31 10:07:39,769 — INFO — Clicking Checkout button
+2025-12-31 10:07:39,793 — INFO — Verifying checkout information page
+2025-12-31 10:07:39,812 — INFO — ✅ Checkout step 1 loaded successfully
+2025-12-31 10:07:39,877 — INFO — Clicking Continue button
+2025-12-31 10:07:39,948 — INFO — Test: Checkout price calculations
+2025-12-31 10:07:39,983 — INFO — ✅ Calculations: Item Total=$53.97, Tax=$4.32, Total=$58.29
+2025-12-31 10:07:39,984 — INFO — ===== TEARDOWN: Checkout test completed =====

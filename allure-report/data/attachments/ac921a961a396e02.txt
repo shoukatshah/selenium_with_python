@@ -1,0 +1,12 @@
+2025-12-31 10:07:06,327 — INFO — ✅ Login container is visible
+2025-12-31 10:07:06,391 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:06,391 — INFO — Test: Add multiple products to cart
+2025-12-31 10:07:06,391 — INFO — Adding product to cart at index 0
+2025-12-31 10:07:06,417 — INFO — Sauce Labs Backpack product added to cart successfully
+2025-12-31 10:07:06,417 — INFO — Total products added to cart: 2
+2025-12-31 10:07:06,417 — INFO — Adding product to cart at index 2
+2025-12-31 10:07:06,442 — INFO — Sauce Labs Bolt T-Shirt product added to cart successfully
+2025-12-31 10:07:06,442 — INFO — Total products added to cart: 3
+2025-12-31 10:07:06,442 — INFO — Adding product to cart at index 4
+2025-12-31 10:07:06,466 — INFO — Sauce Labs Onesie product added to cart successfully
+2025-12-31 10:07:06,466 — INFO — Total products added to cart: 2

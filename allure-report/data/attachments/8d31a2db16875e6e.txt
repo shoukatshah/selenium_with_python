@@ -1,0 +1,5 @@
+2025-12-31 10:07:05,704 — INFO — ✅ Login container is visible
+2025-12-31 10:07:05,766 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:05,766 — INFO — Test: Sort by Name A-Z
+2025-12-31 10:07:05,766 — INFO — Selecting sort option: Name (A to Z)
+2025-12-31 10:07:05,814 — INFO — ✅ Products sorted by Name A-Z

@@ -1,0 +1,4 @@
+2025-12-31 10:07:05,604 — INFO — ✅ Login container is visible
+2025-12-31 10:07:05,669 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:05,669 — INFO — Test: Sorting options availability
+2025-12-31 10:07:05,689 — INFO — ✅ All sorting options available

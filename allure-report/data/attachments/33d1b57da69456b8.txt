@@ -1,0 +1,9 @@
+2025-12-31 10:07:27,526 — INFO — ✅ Login container is visible
+2025-12-31 10:07:27,612 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:27,613 — INFO — Test: Cart icon navigation
+2025-12-31 10:07:27,613 — INFO — Adding product to cart at index 0
+2025-12-31 10:07:27,635 — INFO — Sauce Labs Backpack product added to cart successfully
+2025-12-31 10:07:27,635 — INFO — Total products added to cart: 1
+2025-12-31 10:07:27,635 — INFO — Navigating to cart
+2025-12-31 10:07:27,655 — INFO — ✅ Successfully navigated to cart page
+2025-12-31 10:07:27,664 — INFO — ✅ Products page loaded with 6 products

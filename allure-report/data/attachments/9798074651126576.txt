@@ -1,0 +1,6 @@
+2025-12-31 10:07:06,219 — INFO — ✅ Login container is visible
+2025-12-31 10:07:06,283 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:06,283 — INFO — Test: Add product to cart
+2025-12-31 10:07:06,283 — INFO — Adding product to cart at index 4
+2025-12-31 10:07:06,312 — INFO — Sauce Labs Onesie product added to cart successfully
+2025-12-31 10:07:06,312 — INFO — Total products added to cart: 1

@@ -1,0 +1,4 @@
+2025-12-31 10:07:27,679 — INFO — ✅ Login container is visible
+2025-12-31 10:07:27,767 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:27,767 — INFO — Test: Click product to view details
+2025-12-31 10:07:27,804 — INFO — ✅ Clicked product: Sauce Labs Bike Light

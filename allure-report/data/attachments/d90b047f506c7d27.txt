@@ -1,0 +1,3 @@
+2025-12-31 10:07:05,365 — INFO — ✅ Login container is visible
+2025-12-31 10:07:05,502 — INFO — ✅ Products page loaded with 6 products
+2025-12-31 10:07:05,505 — INFO — ✅ Found 6 products
