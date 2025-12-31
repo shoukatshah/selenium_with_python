@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pytest
 import time
+import allure
 
 @pytest.fixture(scope="class")
 def driver():
@@ -23,3 +24,17 @@ def driver():
     time.sleep(10)
     #input("Press enter key to quit.....")
     driver.quit()
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        driver = item.funcargs.get("driver")
+        if driver:
+            allure.attach(
+                driver.get_screenshot_as_png(),
+                name="Screenshot on Failure",
+                attachment_type=allure.attachment_type.PNG
+            )
