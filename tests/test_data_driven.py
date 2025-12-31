@@ -5,6 +5,7 @@ import pytest
 from pages.products_page import ProductsPage
 from pages.login_page import LoginPage
 from utils.logger import get_logger
+import allure
 
 log = get_logger()
 
@@ -35,17 +36,23 @@ class TestDataDriven:
         ("invalid_users",0),
         ("invalid_users",1)
     ])
+    @allure.feature("Test Data Driven")
+    @allure.story("Login with multiple users")
     def test_multiple_users_login(self,driver, login_data, user_type, index):
         user = login_data[user_type][index]
         user_name = user["username"]
         password = user["password"]
         expected = user["expected"]
         login_page = LoginPage(driver)
-        login_page.open_login_page()
-        login_page.login(user_name,password)
+        with allure.step("Open login page"):
+            login_page.open_login_page()
+        with allure.step("Start login"):
+            login_page.login(user_name,password)
 
     # Display products from csv
     @pytest.mark.parametrize("index",[ 0,1,2])
+    @allure.feature("Product prices")
+    @allure.story("Display all products prices")
     def test_products_prices(self,driver,product_data,index):
         login_page = LoginPage(driver)
         login_page.open_login_page()
